@@ -1,0 +1,15 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "colors": {
+    "background": { "value": "#08080A", "type": "color" },
+    "surface-1": { "value": "#141416", "type": "color" },
+    "surface-2": { "value": "#1C1C1F", "type": "color" },
+    "foreground": { "value": "#E8E8EC", "type": "color" },
+    "ember": { "value": "#6D4AFF", "type": "color" },
+    "gold": { "value": "#D4AF37", "type": "color" },
+    "muted": { "value": "#8A8A92", "type": "color" }
+  },
+  "typography": { "display": { "value": "Geist", "type": "fontFamily" }, "body": { "value": "Geist", "type": "fontFamily" }, "mono": { "value": "Geist Mono", "type": "fontFamily" } },
+  "spacing": { "xs": { "value": "8px", "type": "dimension" }, "sm": { "value": "16px", "type": "dimension" }, "md": { "value": "24px", "type": "dimension" }, "lg": { "value": "40px", "type": "dimension" }, "xl": { "value": "64px", "type": "dimension" } },
+  "borderRadius": { "none": { "value": "0px", "type": "dimension" }, "sm": { "value": "4px", "type": "dimension" }, "full": { "value": "9999px", "type": "dimension" } }
+}
