@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styles from './NavigationShell.module.css';
+import UnityNavigation from './UnityNavigation';
 
 export type NavigationItem = {
   label: string;
@@ -7,6 +8,7 @@ export type NavigationItem = {
 };
 
 type NavigationShellProps = {
+  scope?: 'portfolio' | 'unity';
   mode?: 'linear' | 'radial';
   visualMode?: 'professional' | 'ethereal';
   items?: readonly NavigationItem[];
@@ -24,11 +26,13 @@ const portfolioLinks: readonly NavigationItem[] = [
 
 /** Ordinary links keep both navigation modes usable without browser scripts. */
 export default function NavigationShell({
+  scope = 'portfolio',
   mode = 'linear',
   visualMode = 'professional',
   items = portfolioLinks,
   showSignOut = true,
 }: NavigationShellProps) {
+  if (scope === 'unity') return <UnityNavigation mode={mode} visualMode={visualMode} />;
   return (
     <nav
       className={styles.shell}

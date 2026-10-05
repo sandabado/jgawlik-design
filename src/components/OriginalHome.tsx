@@ -14,7 +14,7 @@ import WorkSection from '@/components/WorkSection';
 import SystemsArchitecture from '@/components/SystemsArchitecture';
 import { requirePublicAccess } from '@/lib/gating/server';
 
-export default async function Home() {
+export default async function OriginalHome() {
   await requirePublicAccess();
   return (
     <main>

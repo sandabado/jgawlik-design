@@ -1,6 +1,6 @@
 # Jesse Gawlik
 
-Next.js App Router portfolio. Phase 1 provides a reversible public pre-launch gate; existing pages and data remain in place. Phase 2 adds a separate reviewer environment on `feature/portfolio-subdomain`, pending content approval before merge or deployment. Future ecosystem routes and cleanup remain deferred.
+Next.js App Router founder site. Phase 1 provides a reversible public pre-launch gate; retained pages and data remain in place. Phase 2 adds the separate reviewer environment on `feature/portfolio-subdomain`. The Unity Center and six pillar scaffolds are being reviewed on `feature/unity-center`; neither feature branch is merged or deployed.
 
 ## Three local development experiences
 
@@ -26,7 +26,7 @@ cd /Users/cougarceleste/Websites/jgawlik-design/jgawlik-design
 npm run dev
 ```
 
-Terminal 2 — original full site:
+Terminal 2 — founder-site review (Unity Center on this branch):
 
 ```sh
 cd /Users/cougarceleste/Websites/jgawlik-design/jgawlik-design
@@ -43,7 +43,7 @@ npm run dev:portfolio
 | Experience | Local URL | Enforced mode |
 | --- | --- | --- |
 | Public gate | `http://localhost:3000` | `PUBLIC_GATE=true`, `PORTFOLIO_MODE=false` |
-| Original full site | `http://localhost:3001` | `PUBLIC_GATE=false`, `PORTFOLIO_MODE=false` |
+| Founder-site review | `http://localhost:3001` | `PUBLIC_GATE=false`, `PORTFOLIO_MODE=false` |
 | Reviewer portfolio | `http://localhost:3002` | `PUBLIC_GATE=true`, `PORTFOLIO_MODE=true` |
 
 The launchers enforce their mode after loading environment values; `dev:portfolio` also loads `.env.portfolio.local`. Ports and hostnames are fixed, and all three servers bind only to loopback. The ungated site on port 3001 is for local review. These commands do not change deployed environments.
@@ -51,6 +51,16 @@ The launchers enforce their mode after loading environment values; `dev:portfoli
 Each launcher uses an ignored project wrapper at `.dev/gate`, `.dev/site`, or `.dev/portfolio`. Edit only the repository's normal `src/` and `public/` files. The launcher synchronizes these into disposable generated views so Next's route watcher sees changes and hot-reloads; changes made inside `.dev/` are overwritten. Each wrapper owns its Next build cache, generated TypeScript configuration, and `next-env.d.ts`, preventing simultaneous servers from overwriting each other's generated files. Environment and build-configuration changes require a restart. Production builds still run from the repository root with their existing `.next` or `.next-portfolio` output.
 
 Cookies are scoped to hosts, not ports: `localhost` cookies are shared across these three URLs. The public owner bypass uses `preview_key`; reviewer authentication uses `portfolio_session`. Signing into the portfolio never bypasses the public gate. A valid owner `preview_key` can still bypass the gate on port 3000; remove it or use a clean browser context when verifying the anonymous gate. Use `localhost` consistently rather than switching between it and `127.0.0.1`, which has a separate cookie scope.
+
+### Unity Center review
+
+On `feature/unity-center`, port 3001 serves the new homepage and status-only `/design`, `/music`, `/manuals`, `/community`, `/foundation` and `/guardian` routes. `/resume` and `/design-system` retain their existing content. Port 3000 keeps Coming Soon; port 3002 keeps the same password-protected reviewer portfolio.
+
+`src/lib/data/pillars.ts` is the source for copy, status labels, destinations, body prompts and per-pillar SEO keywords. `ContentItem` lives in `src/lib/types.ts`; existing résumé/project/timeline/publication data are unchanged. The `NavigationShell` Unity scope supports linear and radial modes, with the radial disclosure used on narrow screens. The appearance control switches professional/ethereal presentation without reloading. Links and the native constellation disclosure work without JavaScript; enhancement-only controls appear after hydration.
+
+`UNITY_CENTER` defaults to enabled. For the retained original homepage, start the review server with `UNITY_CENTER=false npm run dev:site` (stop the existing 3001 server first). The original assembly is preserved in `src/components/OriginalHome.tsx`. This review flag does not disable either access gate. Environment changes require a restart; no private environment file needs editing for this command.
+
+Pillar pages contain only their approved status and a link home. Further content and live Press/Studio ingestion belong to Phase 5; their source URLs are recorded in the pillar data. `SeoConfig` prepares pillar metadata and accepts approved music audio/profile URLs later; it emits no fabricated playback or Spotify/Apple Music tags. Gate and private metadata remain inherited. [Unity Center verification](docs/unity-center-verification.md) records acceptance and boundaries.
 
 - `PUBLIC_GATE=true` enables the deployed gate. Missing or malformed values also enable it.
 - `PUBLIC_GATE=false` restores deployed routes with no code removal; use it for an authorized launch. The `dev:site` launcher selects this setting for local review.
