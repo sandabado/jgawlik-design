@@ -4,14 +4,15 @@
   "private": true,
   "engines": { "node": "22.x" },
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev.mjs gate",
+    "dev:site": "node scripts/dev.mjs site",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
     "design-system:validate": "node scripts/validate-design-system.mjs",
     "gate:setup": "node scripts/setup-public-gate.mjs",
     "portfolio:setup": "node scripts/setup-portfolio-access.mjs",
-    "dev:portfolio": "node --env-file=.env.portfolio.local ./node_modules/next/dist/bin/next dev --port 3001"
+    "dev:portfolio": "node scripts/dev.mjs portfolio"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",

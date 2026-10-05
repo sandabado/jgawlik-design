@@ -1,4 +1,5 @@
 .env*
+.dev/
 !.env.example
 *.tsbuildinfo
 .next-portfolio

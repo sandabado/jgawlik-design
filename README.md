@@ -2,23 +2,61 @@
 
 Next.js App Router portfolio. Phase 1 provides a reversible public pre-launch gate; existing pages and data remain in place. Phase 2 adds a separate reviewer environment on `feature/portfolio-subdomain`, pending content approval before merge or deployment. Future ecosystem routes and cleanup remain deferred.
 
-## Local gate
+## Three local development experiences
 
-Use Node 22, matching CI (`nvm use`, or your Node version manager). Then:
+Use Node 22 in each terminal, matching CI (`nvm use`, or your Node version manager). Run setup once from the repository:
 
 ```sh
+cd /Users/cougarceleste/Websites/jgawlik-design/jgawlik-design
 npm ci
 npm run gate:setup
-npm run dev
+npm run portfolio:setup
 ```
 
 `gate:setup` creates a cryptographically random 32-byte `PREVIEW_BYPASS_SECRET` in the ignored, owner-readable `.env.local`. It preserves a valid existing secret and existing flags, and prints no secret values. `.env.example` documents the variables. Restart the server after changing environment values.
 
-- `PUBLIC_GATE=true` enables the gate. Missing or malformed values also enable it.
-- `PUBLIC_GATE=false` restores the existing routes with no code removal. Do this only at an authorized launch.
+`portfolio:setup` privately prompts for a reviewer password and confirmation, then saves its hash and a signing key in ignored `.env.portfolio.local`. The password is not printed or stored as plaintext. Setup can be rerun to rotate credentials; it is not required every time you start development.
+
+Start these commands in three separate terminals. Activate Node 22 in each terminal first.
+
+Terminal 1 — public gate:
+
+```sh
+cd /Users/cougarceleste/Websites/jgawlik-design/jgawlik-design
+npm run dev
+```
+
+Terminal 2 — original full site:
+
+```sh
+cd /Users/cougarceleste/Websites/jgawlik-design/jgawlik-design
+npm run dev:site
+```
+
+Terminal 3 — password-protected reviewer portfolio:
+
+```sh
+cd /Users/cougarceleste/Websites/jgawlik-design/jgawlik-design
+npm run dev:portfolio
+```
+
+| Experience | Local URL | Enforced mode |
+| --- | --- | --- |
+| Public gate | `http://localhost:3000` | `PUBLIC_GATE=true`, `PORTFOLIO_MODE=false` |
+| Original full site | `http://localhost:3001` | `PUBLIC_GATE=false`, `PORTFOLIO_MODE=false` |
+| Reviewer portfolio | `http://localhost:3002` | `PUBLIC_GATE=true`, `PORTFOLIO_MODE=true` |
+
+The launchers enforce their mode after loading environment values; `dev:portfolio` also loads `.env.portfolio.local`. Ports and hostnames are fixed, and all three servers bind only to loopback. The ungated site on port 3001 is for local review. These commands do not change deployed environments.
+
+Each launcher uses an ignored project wrapper at `.dev/gate`, `.dev/site`, or `.dev/portfolio`. Edit only the repository's normal `src/` and `public/` files. The launcher synchronizes these into disposable generated views so Next's route watcher sees changes and hot-reloads; changes made inside `.dev/` are overwritten. Each wrapper owns its Next build cache, generated TypeScript configuration, and `next-env.d.ts`, preventing simultaneous servers from overwriting each other's generated files. Environment and build-configuration changes require a restart. Production builds still run from the repository root with their existing `.next` or `.next-portfolio` output.
+
+Cookies are scoped to hosts, not ports: `localhost` cookies are shared across these three URLs. The public owner bypass uses `preview_key`; reviewer authentication uses `portfolio_session`. Signing into the portfolio never bypasses the public gate. A valid owner `preview_key` can still bypass the gate on port 3000; remove it or use a clean browser context when verifying the anonymous gate. Use `localhost` consistently rather than switching between it and `127.0.0.1`, which has a separate cookie scope.
+
+- `PUBLIC_GATE=true` enables the deployed gate. Missing or malformed values also enable it.
+- `PUBLIC_GATE=false` restores deployed routes with no code removal; use it for an authorized launch. The `dev:site` launcher selects this setting for local review.
 - `PREVIEW_BYPASS_SECRET` is server-only: a random base64url value of 43–128 characters. An absent/invalid secret disables bypass access while leaving the gate active. Never prefix it with `NEXT_PUBLIC_`.
 
-The policy is identical in development and production. `/`, `/resume`, `/design-system`, other paths, image paths, and API requests are intercepted without a valid owner cookie. Protected pages and APIs also check access on the server as a second boundary. The gate itself is server-rendered, readable without JavaScript, and uses CSS motion that stops for `prefers-reduced-motion`.
+The gate launcher uses the same access policy as the deployed public gate. `/`, `/resume`, `/design-system`, other paths, image paths, and API requests are intercepted without a valid owner cookie. Protected pages and APIs also check access on the server as a second boundary. The gate itself is server-rendered, readable without JavaScript, and uses CSS motion that stops for `prefers-reduced-motion`.
 
 ## Owner bypass cookie
 
@@ -74,16 +112,16 @@ The released deployment and complete checklist are recorded in [Phase 1 verifica
 
 Use the same codebase in a separate Vercel project. This reuses the fonts, design tokens, and resume without introducing a second app or changing the public project's access policy. It also means both deployments contain the retained source; middleware, server guards, and private asset filtering enforce which surfaces can be served. Keep environment variables and domains separate.
 
-For local development with Node 22:
+The three-terminal workflow above runs the reviewer portfolio at `http://localhost:3002`. After initial setup, start it with Node 22:
 
 ```sh
-npm run portfolio:setup
+cd /Users/cougarceleste/Websites/jgawlik-design/jgawlik-design
 npm run dev:portfolio
 ```
 
 The setup command privately prompts for a 16–256 character password and confirmation. It saves only a salted scrypt hash and a random signing key in ignored, owner-readable `.env.portfolio.local` (mode `0600`), and prints neither. It preserves unrelated settings. Run it again to change the password, then restart the server; changing the hash or signing key invalidates existing sessions. Choose your own password before sharing access; local QA credentials are temporary.
 
-The portfolio runs at `http://localhost:3001`; `npm run dev` continues to run the public gate at `http://localhost:3000`. The two modes use separate build directories so they can run together. You can also load `.env.portfolio.local` into your process environment and use the ordinary `npm run dev` command on a chosen port. The mode is selected by environment configuration, never by a client-supplied host/header.
+The launcher loads `.env.portfolio.local` and then enforces portfolio mode on port 3002. `npm run dev` enforces the public gate on port 3000; `npm run dev:site` exposes the original full site locally on port 3001. Mode selection never trusts a client-supplied host or forwarding header.
 
 Anonymous visitors see `/portfolio-access`. Successful server-side password verification issues a host-only, HttpOnly, SameSite=Strict cookie valid for eight hours; it is Secure in production and on Vercel, with HTTP permitted only for local development. The owner `preview_key` cannot authenticate reviewers. Login and logout require same-origin POST requests. Failed authentication uses generic copy; oversized bodies, forged/expired sessions, and unavailable configuration are rejected. Every private response uses noindex and private/no-store headers.
 

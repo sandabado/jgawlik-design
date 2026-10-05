@@ -1,4 +1,5 @@
 node_modules
+.dev/
 .next
 .next-portfolio
 out
