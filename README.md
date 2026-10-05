@@ -67,3 +67,5 @@ Node 22.23.3 production build, ESLint, token validation, and TypeScript with rep
 Browser checks passed at 1280 px and 390 px with no horizontal overflow or console errors. A temporary QA proxy blocked all page scripts using CSP and confirmed readable content. The same fixture activated the existing reduced-motion CSS branch and confirmed `animation-name: none`; native OS preference emulation was unavailable in the browser tooling. The QA proxy is outside the application and is not deployed.
 
 Dependency audit remains pending user approval. Installation uses `--no-audit`; subsequent phases and audit repairs are deferred.
+
+The released deployment and complete checklist are recorded in [Phase 1 verification](docs/phase-1-verification.md).
