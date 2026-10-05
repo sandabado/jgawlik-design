@@ -12,8 +12,10 @@ import Compass from '@/components/Compass';
 import TreeOfLifeProgress from '@/components/TreeOfLifeProgress';
 import WorkSection from '@/components/WorkSection';
 import SystemsArchitecture from '@/components/SystemsArchitecture';
+import { requirePublicAccess } from '@/lib/gating/server';
 
-export default function Home() {
+export default async function Home() {
+  await requirePublicAccess();
   return (
     <main>
       <DodecahedronLoader />

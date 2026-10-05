@@ -1,0 +1,58 @@
+.page {
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  padding: clamp(24px, 5.5vw, 80px);
+  align-items: center;
+  text-align: center;
+  isolation: isolate;
+}
+
+.field {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: min(86vw, 880px);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--wax-gold) 18%, transparent);
+  border-radius: 50%;
+  box-shadow: inset 0 0 120px rgba(109, 74, 255, .06), 0 0 100px rgba(109, 74, 255, .04);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: fieldBreath 10s ease-in-out infinite;
+}
+
+.field::before,
+.field::after {
+  position: absolute;
+  inset: 15%;
+  border: 1px solid color-mix(in srgb, var(--wax-gold) 14%, transparent);
+  border-radius: 50%;
+  content: '';
+}
+
+.field::after { inset: 32%; border-color: color-mix(in srgb, var(--warm-gold) 20%, transparent); }
+.header { display: flex; align-items: center; }
+.identity { display: flex; gap: 13px; align-items: center; color: var(--wax-gold); font: 600 24px/1 var(--font-display); letter-spacing: -.06em; }
+.mark { width: 39px; height: 39px; }
+.plus { display: inline-block; margin-left: 3px; color: var(--warm-gold); vertical-align: top; font: 14px/1 var(--font-mono); }
+.content { display: flex; width: 100%; max-width: 860px; margin: auto 0; padding: clamp(68px, 12vh, 140px) 0; flex-direction: column; align-items: center; }
+.content h1 { margin: 0; color: var(--parchment-light); font: 500 clamp(42px, 7.5vw, 96px)/.95 var(--font-display); letter-spacing: -.065em; text-wrap: balance; }
+.content h1 span { display: block; color: var(--wax-gold); }
+.description { max-width: 540px; margin: 32px 0 0; color: var(--parchment-dark); font: 400 clamp(17px, 1.65vw, 21px)/1.6 var(--font-body); text-wrap: balance; }
+.footer { color: var(--silver); font: 11px/1.6 var(--font-mono); letter-spacing: .04em; }
+
+@keyframes fieldBreath {
+  0%, 100% { transform: translate(-50%, -50%) scale(.98); opacity: .6; }
+  50% { transform: translate(-50%, -50%) scale(1.02); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .field { width: 130vw; }
+  .content { padding: 88px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field { animation: none; }
+}
