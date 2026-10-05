@@ -35,6 +35,8 @@ The three protected scaffolds are `/portfolio/case-studies/american-express`, `/
 
 Retained data now agrees with the existing résumé: Amex is current, its employment role is Senior Product Designer, Whole Body starts in 2025 and Brand Buddha starts in January 2018. The overall Agentic Systems Architect positioning remains distinct from the Amex employment title. Unsupported impact/adoption claims use `[METRIC — PENDING]`. This reconciles source inconsistencies; employment history and metrics were not independently verified externally.
 
+The owner's subsequent reconciliation instruction confirms current Amex employment but reserves the final title, dates and claims for review. The earlier title/date alignment above is provisional; see [content-reconciliation.md](content-reconciliation.md) for every held decision and the dead-code/contact cleanup.
+
 Authenticated `/resume` HTML and its captured print CSS produced three US Letter pages through WeasyPrint 70.0. All pages were rasterized and visually reviewed: white background, readable content, whole job/publication blocks, and no clipped text, overlap, blank pages or orphaned headings. Extracted text confirmed the reconciled dates/current Amex wording and pending metrics; navigation/print controls were absent. **Native browser print-dialog export remains unverified.** Evidence is under `/private/tmp/jgawlik-phase2-verification/`, including `resume-pdf-verification.json`, `resume-pdf-review.md` and the rendered PDF/pages.
 
 ## Dependency audit
