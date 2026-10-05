@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "eslint .",
     "design-system:validate": "node scripts/validate-design-system.mjs",
-    "gate:setup": "node scripts/setup-public-gate.mjs"
+    "gate:setup": "node scripts/setup-public-gate.mjs",
+    "portfolio:setup": "node scripts/setup-portfolio-access.mjs",
+    "dev:portfolio": "node --env-file=.env.portfolio.local ./node_modules/next/dist/bin/next dev --port 3001"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",
@@ -21,6 +23,9 @@
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.3"
+  },
+  "overrides": {
+    "postcss": "8.5.29"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

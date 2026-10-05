@@ -1,3 +1,4 @@
 .env*
 !.env.example
 *.tsbuildinfo
+.next-portfolio

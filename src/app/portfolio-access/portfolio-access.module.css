@@ -1,0 +1,21 @@
+.page { display: flex; min-height: 100svh; padding: clamp(24px, 5.5vw, 80px); flex-direction: column; isolation: isolate; }
+.header { display: flex; align-items: center; }
+.identity { display: flex; gap: 13px; align-items: center; color: var(--wax-gold); font: 600 24px/1 var(--font-display); letter-spacing: -.06em; }
+.mark { width: 39px; height: 39px; }
+.plus { display: inline-block; margin-left: 3px; color: var(--warm-gold); vertical-align: top; font: 14px/1 var(--font-mono); }
+.content { width: 100%; max-width: 780px; margin: auto 0; padding: clamp(68px, 12vh, 140px) 0; }
+.kicker { margin: 0 0 28px; color: var(--warm-gold); font: 500 10px/1.4 var(--font-mono); letter-spacing: .2em; }
+.content h1 { margin: 0; color: var(--parchment-light); font: 600 clamp(48px, 7.5vw, 98px)/.9 var(--font-display); letter-spacing: -.075em; }
+.content h1 span { color: var(--wax-gold); }
+.description { max-width: 480px; margin: 28px 0 0; color: var(--parchment-dark); font: 400 18px/1.5 var(--font-body); }
+.form { display: flex; width: 100%; max-width: 400px; margin-top: 42px; flex-direction: column; align-items: flex-start; }
+.form label { margin-bottom: 12px; color: var(--parchment-dark); font: 500 10px/1.5 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+.form input { width: 100%; min-height: 52px; padding: 13px 16px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--midnight); color: var(--parchment-light); font: 18px/1.4 var(--font-body); }
+.form input:focus-visible { border-color: var(--wax-gold); outline: 2px solid var(--wax-gold); outline-offset: 3px; }
+.form button { display: inline-flex; min-height: 48px; margin-top: 22px; padding: 14px 20px; gap: 34px; align-items: center; border: 1px solid var(--wax-gold); border-radius: var(--radius-sm); background: var(--wax-gold); color: var(--obsidian); font: 600 10px/1.5 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+.form button:hover { background: var(--parchment-light); border-color: var(--parchment-light); }
+.form button:focus-visible, .footer a:focus-visible { outline: 2px solid var(--wax-gold); outline-offset: 5px; }
+.error { margin: 14px 0 0; color: var(--parchment-light); font: 14px/1.5 var(--font-body); }
+.footer { color: var(--silver); font: 10px/1.5 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+.footer a { display: inline-flex; min-height: 44px; gap: 12px; align-items: center; }
+.footer a:hover { color: var(--parchment-light); }
