@@ -30,7 +30,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           <section className={styles.placeholder} key={section} aria-labelledby={`study-section-${index}`}>
             <p className={styles.kicker}>0{index + 1} / Content pending</p>
             <h2 id={`study-section-${index}`}>{section}</h2>
-            <p>{section === 'Outcome' ? '[METRIC — PENDING]' : 'This section is awaiting approved case-study content.'}</p>
+            <p>{section === 'Outcome' ? study.outcome : 'This section is awaiting approved case-study content.'}</p>
           </section>
         ))}
       </div>

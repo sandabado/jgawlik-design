@@ -133,7 +133,7 @@ After sign-in, `/` serves the portfolio home. Available routes:
 - `/portfolio/case-studies/tetra`
 - `/resume`, including its print stylesheet
 
-Case studies contain explicit preparation placeholders and `[METRIC — PENDING]` markers. Legacy pages/APIs are excluded from the reviewer environment. `NavigationShell` accepts linear/radial navigation and professional/ethereal appearance props; the future six-pillar ecosystem remains a later phase.
+Case studies remain in preparation. Their outcome copy uses the owner's approved qualitative observations; no metric placeholders or unverified numeric results are shown. Legacy pages/APIs are excluded from the reviewer environment. `NavigationShell` accepts linear/radial navigation and professional/ethereal appearance props; the future six-pillar ecosystem remains a later phase.
 
 ### Hosted portfolio configuration
 

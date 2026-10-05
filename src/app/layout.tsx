@@ -5,12 +5,12 @@ import { isPortfolioMode } from '@/lib/portfolio-access/session';
 
 const portfolioMetadata: Metadata = {
   title: 'Jesse Gawlik — Agentic Systems Architect',
-  description: 'I design and ship autonomous AI products. Enterprise-grade design thinking. Full-stack execution. Agentic workflow architecture. Currently at American Express. Founder of Whole Body.',
-  keywords: ['Agentic AI', 'Product Design', 'Systems Architect', 'Next.js', 'Full-Stack', 'Enterprise UX'],
+  description: 'Building and stress-testing AI-assisted products and agentic workflows, informed by senior-level enterprise experience and hands-on implementation. Currently at American Express. Founder of Whole Body.',
+  keywords: ['Agentic AI', 'Product Designer', 'Systems Architect', 'Next.js', 'Full-Stack', 'Enterprise UX'],
   authors: [{ name: 'Jesse Gawlik' }],
   openGraph: {
     title: 'Jesse Gawlik — Agentic Systems Architect',
-    description: 'Enterprise-grade design thinking. Full-stack execution. Agentic workflow architecture.',
+    description: 'Building and stress-testing AI-assisted products. Senior-level enterprise experience. Hands-on implementation and human-reviewed agentic workflows.',
     type: 'website',
     url: 'https://jessegawlik.com',
   },

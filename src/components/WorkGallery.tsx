@@ -31,7 +31,7 @@ function TetraVisual() {
 
   return (
     <div className="gallery-visual gallery-visual--tetra" aria-hidden="true">
-      <div className="gallery-visual__hud"><span>TETRA OS / DEPLOYED</span><b>AI + HUMAN</b></div>
+      <div className="gallery-visual__hud"><span>TETRA OS / WORKFLOW R&D</span><b>AI + HUMAN</b></div>
       <svg viewBox="0 0 460 420">
         <defs>
           <radialGradient id="tetra-core" cx="50%" cy="48%" r="50%"><stop offset="0%" stopColor="#8d76ff" stopOpacity=".45" /><stop offset="100%" stopColor="#07060b" stopOpacity="0" /></radialGradient>
@@ -90,7 +90,7 @@ function EcosystemVisual() {
         <text className="gallery-visual__core-label" x="230" y="207" textAnchor="middle">ONE</text>
         <text className="gallery-visual__core-label gallery-visual__core-label--small" x="230" y="222" textAnchor="middle">PLATFORM</text>
       </svg>
-      <div className="gallery-visual__footer"><span>SHARED AUTH</span><i /><span>STRIPE</span><i /><span>AI OPS</span></div>
+      <div className="gallery-visual__footer"><span>MEMBERSHIP</span><i /><span>COMMERCE</span><i /><span>WORKFLOW R&D</span></div>
     </div>
   );
 }
@@ -146,7 +146,7 @@ function GalleryRoom({ project, index, active, revealed, onActivate, onToggle }:
         <p className="gallery-room__meta">{project.company} <b>·</b> {project.role} <b>·</b> {project.period}</p>
         <h3>{project.title}</h3>
         <p className="gallery-room__summary">{project.description}</p>
-        <div className="gallery-room__metric"><span>PROOF POINT</span><b>{project.metric}</b></div>
+        <div className="gallery-room__metric"><span>OBSERVATIONS</span><b>{project.metric}</b></div>
         <button type="button" className="gallery-room__toggle" aria-expanded={revealed} aria-controls={detailsId} onClick={() => onToggle(project.id)}>{revealed ? 'CLOSE CASE NOTES' : 'OPEN CASE NOTES'} <ChevronDown size={15} /></button>
         <AnimatePresence initial={false}>
           {revealed && <motion.div id={detailsId} className="gallery-room__details" initial={reducedMotion ? false : { height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: reducedMotion ? 0 : 0.46, ease }}>

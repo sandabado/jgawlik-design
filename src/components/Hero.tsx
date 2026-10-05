@@ -18,7 +18,7 @@ export default function Hero() {
       <motion.div initial="hidden" animate="show" transition={{ delayChildren: 0.15, staggerChildren: 0.12 }} className="hero-v2__inner">
         <p className="section-kicker">JESSE GAWLIK // AGENTIC SYSTEMS ARCHITECT</p>
         <h1>{headline.map((word) => <motion.span key={word} variants={enter} transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }} className={word === 'SYSTEMS' ? 'hero-v2__accent' : ''}>{word}</motion.span>)}</h1>
-        <motion.p variants={enter} transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }} className="hero-v2__description">I design and ship autonomous AI products — from user research to deployment.<br /><br /><em>Enterprise-grade design thinking. Full-stack execution. Agentic workflow architecture.</em></motion.p>
+        <motion.p variants={enter} transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }} className="hero-v2__description">Building and stress-testing AI-assisted products — from user research to hands-on implementation.<br /><br /><em>Senior-level enterprise experience. Product design. Human-reviewed agentic workflows.</em></motion.p>
         <motion.div variants={enter} transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }} className="hero-v2__cta"><button onClick={() => go('#work')}>VIEW WORK</button><button onClick={() => go('#contact')}>CONTACT</button></motion.div>
       </motion.div>
       <BuildSequence />

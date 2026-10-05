@@ -1,12 +1,12 @@
 # Content reconciliation — 5 October 2026
 
-Review surface: `http://localhost:3001/`. Branch: `feature/portfolio-subdomain`. The owner confirmed that American Express employment is **current**. Title, date and claim decisions remain with the owner. The new Unity Center and pillar build stays parked.
+Review surface: `http://localhost:3001/`. Branch: `feature/portfolio-subdomain`. The owner confirmed that American Express employment is **current** and ruled on titles, dates and claims on 5 October 2026. The [Rulings Applied appendix](#rulings-applied--5-october-2026) is authoritative; credentials are the only remaining open inventory item. The new Unity Center and pillar build stays parked until the owner reviews this pass.
 
 ## Scope and provenance
 
-The three-server setup was committed and pushed at `b862b7fd6b74247c8e87bf8ded56d346a8c12558`. The earlier Phase 2 commit, `4dbd7e56ad945071f84d44b3395ce3918f171bd3`, had already changed Amex to current, changed the metadata/résumé positioning from Designer to Architect, aligned Brand Buddha and Whole Body years, and replaced some metrics with `[METRIC — PENDING]`. Those earlier title/date choices are **provisional, awaiting owner decision**, even where the strings now agree. This reconciliation does not make further title, date, metric, price or claim edits.
+The three-server setup was committed and pushed at `b862b7fd6b74247c8e87bf8ded56d346a8c12558`. The earlier Phase 2 commit, `4dbd7e56ad945071f84d44b3395ce3918f171bd3`, had already changed Amex to current, changed the metadata/résumé positioning from Designer to Architect, aligned Brand Buddha and Whole Body years, and replaced some metrics with `[METRIC — PENDING]`. Those earlier title/date choices were provisional. The initial reconciliation at `827b374` inventoried the decisions and removed dead code/contact delivery scaffolding; the owner-ruling pass below now applies approved title, date, metric, publication and claim corrections.
 
-Current locations below use repository-relative `file:line` references. Locations marked **historical** refer to the named commit; removed files and original claims remain recoverable from Git. For example: `git show b862b7f:src/components/PortfolioShell.tsx`. No active page component, layout, typography or design token changed in this pass. Only confirmed unreachable components/utilities, their unused CSS and the misleading contact endpoint were removed.
+The inventory and its awaiting-decision statuses below are the **pre-ruling audit snapshot at `827b374`**; the appendix records how those rows were resolved. These baseline locations use repository-relative `file:line` references. Locations marked **historical** refer to the named commit; removed files and original claims remain recoverable from Git. For example: `git show b862b7f:src/components/PortfolioShell.tsx`. The initial cleanup changed no active page, layout, typography or design token. The subsequent owner-ruling pass changes copy and content bindings only; routing, DOM composition, styles and motion remain unchanged.
 
 ## Confirmed employment status
 
@@ -116,10 +116,87 @@ No unambiguous spelling typo was found that could be changed without choosing br
 
 Local evidence is retained under `/private/tmp/jgawlik-content-reconciliation/`: `reachability.json`, `css-removal.json`, `css-preservation.json`, `layout-comparison.json`, `http-results.json`, `password-check.json`, `browser-resume.json`, `browser-final.json`, `typecheck.log` and the three build logs. The résumé screenshot is saved outside Git in the task visualization directory. The earlier owner-reported incognito/password-flow pass is recorded in `docs/three-server-verification.md`; it is separate from automated checks after this reconciliation. No new incognito window was controlled by the agent.
 
-## Owner decision pass
+## Original owner decision queue (superseded by the rulings below)
 
 1. Choose the overall title and confirm the two project-specific roles in the title inventory.
 2. Confirm Brand Buddha start, Whole Body founding versus launch, AI collaboration start, and selected-history coverage.
 3. Supply or resolve the held metrics, encryption/deployment claims, publication identity/credits/prices and supporting credentials.
 
-Approval of this report is the prerequisite for the next homepage/pillar build. No new pillar pages or ContentItem schema were added during this reconciliation.
+Review of the applied-ruling pass is the prerequisite for the next homepage/pillar build. No new pillar pages or ContentItem schema were added during this reconciliation.
+
+## Rulings Applied — 5 October 2026
+
+The owner authorized these content-only changes on `feature/portfolio-subdomain`. The three decisions below supersede every awaiting-decision entry in the baseline inventory except the credentials row. Historical audit text remains for provenance, not as current reviewer-facing copy or an unresolved decision queue.
+
+### Governing rule: contextual titling
+
+Use **Agentic Systems Architect** for persona/elevation surfaces: document title, OG title, Hero H1 and kicker. Use employment-verifiable Product Designer wording for structured/credential surfaces. The résumé combines both as **Product Designer & Agentic Systems Architect**; search keywords include **Product Designer** and **Systems Architect**. Do not substitute Architect for an employer's title. Whole Body project roles are **Founder · Architect · Developer** and **Systems Architect**. Publication credits remain as previously recorded. Future edits must follow this contextual rule rather than forcing one universal string.
+
+The row numbers in the resolution tables count data rows within their corresponding baseline inventory table, in order.
+
+| Title inventory rows | Applied resolution | Status |
+| --- | --- | --- |
+| 1–2: document and OG titles | Retained “Jesse Gawlik — Agentic Systems Architect” in `src/app/layout.tsx:7` and `:12`. | Applied / retained by owner ruling. |
+| 3: keywords | `src/app/layout.tsx:9` now includes both Product Designer and Systems Architect. | Applied. |
+| 4–5: Hero H1 and kicker | Architect wording remains in `src/components/Hero.tsx:6`, `:19`, `:20`. | Retained by owner ruling. |
+| 6: résumé title | `src/lib/data/resume.ts:3` is “Product Designer & Agentic Systems Architect”; the existing résumé component renders it. | Applied. |
+| 7–8: venture/project roles | Whole Body “Founder · Architect · Developer” and Studios “Systems Architect” remain in `src/lib/data/projects.ts:31`, `:44`. | Retained by owner ruling. |
+| 9–11: Amex, Thermo and historical employer roles | Exact existing titles remain; Amex remains Present. No Architect substitution and no additional history entries. | Retained by owner ruling. |
+| 12: publication credits | Author · Designer · Publisher and Executive Producer · Brand Designer remain in `src/lib/data/publications.ts:4`, `:6`; album credits also remain unchanged. | Retained by owner ruling. |
+| 13: alternate Designer template | Remains deleted at `827b374`; recoverable at `b862b7f`. | Closed by prior cleanup. |
+
+### Dates: distinct events and deliberate precision
+
+| Date inventory row | Applied resolution | Status |
+| --- | --- | --- |
+| 1: Brand Buddha | `src/lib/data/timeline.ts:7` uses the owner's requested 2017–2018 label and states that work continued through October 2019. `src/lib/data/resume.ts:21` uses 2017–October 2019. The owner confirmed the start year but supplied no start month; none was invented. | Applied. |
+| 2: Whole Body founding versus launch | Timeline remains keyed to 2025 and is titled “Founded Whole Body Earth”; its description explicitly states platform launch in 2026. The founder résumé and Whole Body project description distinguish the same two events. | Applied. |
+| 3: agentic phase | Timeline and founder copy identify the AI phase as beginning in 2026; `src/lib/data/projects.ts:44` stays 2026–Present. | Applied. |
+| 4: Amex precision | Résumé April 2022–Present is authority; 2022 summaries intentionally remain year-only. | Retained by owner ruling. |
+| 5: Thermo precision | Résumé November 2019–March 2022 is authority; 2019–2022 / 2019 summaries intentionally remain year-only. | Retained by owner ruling. |
+| 6: selected-history coverage | Existing Waveside résumé entry and FortuneBuilders/Anacom timeline entries remain; no entries were added, deleted or reordered. | Retained by owner ruling. |
+| 7: earlier verification narrative | `docs/phase-2-verification.md` now records these rulings and links to this appendix; the prior PDF is explicitly labeled as predating the updated copy. | Applied. |
+
+### Claims: qualitative observations and live R&D
+
+| Claim inventory row | Applied resolution | Status |
+| --- | --- | --- |
+| 1: Amex TETRA speed/ramp metric | Replaced the visible marker with “Early observations indicate compressed design-cycle time and higher stakeholder confidence; formal measurement ongoing.” No percentage or ramp-duration number. | Applied. |
+| 2: Thermo handoff metric | “Improved handoff efficiency observed across the product suite.” No percentage. | Applied. |
+| 3: member/Lighthouse/property counts | Whole Body metric and founder adoption copy use active-development language, referring members/product states to wholebody.earth. No member count, Lighthouse score or live-property count. | Applied. |
+| 4: shipped-product count | Timeline records founding/launch/AI events and active development rather than a number of shipped products. | Applied. |
+| 5: Amex audience reach | Timeline and résumé scope work to virtual cards/account navigation within @ Work; no audience-size assertion. | Applied. |
+| 6: prototype count/readiness | Studios outcome describes active R&D and intended human review; its metric uses the owner's qualitative ecosystem wording. No prototype-readiness marker or active-prototype count. | Applied. |
+| 7: encryption claims | Removed encrypted memberships and zero-knowledge encryption. No replacement security claim was inferred for dodeca.life; the copy describes the product and its active-development context. | Applied. |
+| 8: TETRA rollout/artifacts | Project title and illustration label now identify workflow R&D. Description uses the permitted “built and currently stress-tested inside my role at American Express”; approach is a pilot in the owner's workflow with human review. Artifacts are framed as work in development, explorations and review plans. | Applied. |
+| 9: alignment took months | Replaced categorical timing/autonomy assertions with the workflow areas the owner set out to improve. | Applied. |
+| 10: Thermo implementation/adoption/audit | Narrowed prose to component design and research patterns; removed the categorical React implementation, certified-audit and suite-wide adoption implications. Outcome and résumé use the approved qualitative handoff observation. | Applied. |
+| 11: live platform / infrastructure | Whole Body says built and operate, active development, evolving integrations and human review. Categorical launch/automated-production claims and webhook artifact assertion are narrowed. The five-arm model and existing live platform link remain. Illustration captions identify membership/commerce/workflow R&D. | Applied. |
+| 12: sole authorship / deployed agents / artifact completeness | Removed “alone”, categorical operational-agent counts and “complete” brand-system wording. Collaboration with Chris Kyser remains; agent work and supporting artifacts are identified as exploration, concepts or planning. Five-arm brand/model geometry remains. | Applied. |
+| 13: teams spend most of their energy | Replaced the unsupported generalization with recurring areas for exploration in studio work. | Applied. |
+| 14: autonomous shipping / enterprise grade / pioneering | Hero, résumé and metadata say building and stress-testing, senior-level enterprise experience, hands-on implementation and human-reviewed workflows. No novelty or autonomous-product-shipping claim. | Applied. |
+| 15: book identity / price / preview | First publication card now identifies Whole Body Presence — Manual I, links to its Press book page, states public preview and Manuals II–V editorial hold, and has no sale price. Publication credit and existing card ID/format remain. | Applied. |
+| 16: album release / price / spelling | Display text is Sandābādo (uppercase Sandābādo in the marquee/brand tile); ASCII sandabado.com URLs remain unchanged. Album copy separates the live Records catalog status from release details in preparation. No vinyl price or Stream Free assertion. | Applied. |
+| 17: compilation / contributors / price / framers | Living Earth: Volume 1 is explicitly in preparation; unsupported track/participant counts and prices are removed. “framers” remains intentional terminology; producer/brand-designer credit remains. Link points to the Studio Records room. | Applied. |
+| 18: Codex / five arms versus future IA | The historical/current Guardian–Foundation–Studios–Presence–Press model is retained. Updating the public-preview publication identity does not rewrite that model; the future six-pillar IA remains parked. | Retained by owner ruling. |
+| 19: degrees and certifications | Exact text in `src/lib/data/resume.ts:24`, `:25` remains unchanged. Owner will confirm awarded titles, dates/completion and certifications separately. | **Open — only remaining inventory decision.** |
+
+The five employment-status inventory rows remain consistent with current Amex employment. All eight dead-code/contact rows remain closed by `827b374`; nothing was restored. All metric-marker occurrences in runtime source, including the three private case-study Outcome sections, are replaced by the approved qualitative observations. Other case-study sections remain explicitly in preparation; this pass does not claim completed case-study narratives.
+
+On 5 October 2026, the browser verified [Whole Body Press](https://www.wholebody.press/): Manual I preview open, four subsequent manuals on editorial hold; and [Whole Body Studio](https://www.wholebody.studio/): Sandābādo on the roster and Records catalog active. These primary pages support publication/status framing, not sales, measured adoption, cryptography or formal workflow metrics. The text-fetch tool could not open these domains; browser evidence is saved in `/private/tmp/jgawlik-owner-rulings/publication-status.json`.
+
+### Applied-ruling verification
+
+| Check | Result for the 5 October owner-ruling pass |
+| --- | --- |
+| Lint / tokens / whitespace | **Pass:** `npm run lint`, `npm run design-system:validate`, `git diff --check`. |
+| TypeScript | **Pass:** `tsc --noEmit --typeRoots ./node_modules/@types`. Repository-local type roots avoid the previously recorded unrelated ancestor type package; compiler configuration is unchanged. |
+| Public and portfolio production builds | **Pass:** both modes build on Node 22.23.3 in `/private/tmp/jgawlik-owner-rulings-build`, with the repository's installed dependencies. All 76 tracked runtime/public/config files match the working source byte-for-byte; no private environment files were copied. These clean builds avoid the direct-checkout ambient type-package limitation recorded above. |
+| Content and preservation assertions | **26 passed:** approved titles, observations, dates and publication states; credentials and employer titles retained; selected history and five-arm model retained; no runtime metric markers, prices or unsupported encryption wording. AST comparisons confirm unchanged component composition, numeric props and motion configuration in all five edited TSX files; every CSS file is byte-identical to `827b374`. |
+| Three-server HTTP regression | **44 passed:** public gate on 3000, retained routes on 3001, anonymous portfolio/password and private-asset protection on 3002, and mode-specific POST policies. `/api/contact` remains removed. Separate source mirrors/caches and all three servers remain running. |
+| Original-site browser | **Pass:** home and résumé render the contextual titles, current Amex wording, confirmed Brand Buddha span, distinct Whole Body events and updated publication statuses. No invalid-copy matches or horizontal overflow in the checked views. |
+| Authenticated portfolio browser | **Pass:** home, résumé and all three case-study routes render through the existing owner-authenticated session. Amex/TETRA and Thermo Outcome sections display the approved qualitative observations; no metric markers remain. The password and session configuration were not read, reset or changed. |
+| Public gate / console | **Pass:** the browser still shows only Coming Soon on 3000; captured console error lists are empty for all three experiences, and no current runtime/build error dialog is present. Anonymous route checks use requests without cookies. The owner's earlier incognito/password-flow verification remains separate evidence; no new agent-controlled incognito session is claimed. |
+| Visual review / print boundary | **Pass:** the updated résumé viewport was captured and visually reviewed; the combined title fits without clipping and the existing layout remains intact. No new PDF/native print export was performed; the Phase 2 PDF evidence predates these rulings. |
+
+Evidence is retained in `/private/tmp/jgawlik-owner-rulings/`: `content-checks.json`, `http-results.json`, `browser-original.json`, `browser-final.json`, `source-equivalence.json`, `publication-status.json`, and lint/typecheck/public/portfolio build logs. The updated résumé screenshot is outside Git in the task visualization directory. Authentication, middleware, cache configuration, route structure and styles have no changes in this pass. Credentials remain the only open inventory decision. The Unity Center build remains parked pending owner review of this pass.
