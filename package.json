@@ -2,12 +2,14 @@
   "name": "jesse-gawlik-portfolio",
   "version": "0.1.0",
   "private": true,
+  "engines": { "node": "22.x" },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "design-system:validate": "node scripts/validate-design-system.mjs"
+    "design-system:validate": "node scripts/validate-design-system.mjs",
+    "gate:setup": "node scripts/setup-public-gate.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",
