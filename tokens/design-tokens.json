@@ -11,5 +11,69 @@
   },
   "typography": { "display": { "value": "Geist", "type": "fontFamily" }, "body": { "value": "Geist", "type": "fontFamily" }, "mono": { "value": "Geist Mono", "type": "fontFamily" } },
   "spacing": { "xs": { "value": "8px", "type": "dimension" }, "sm": { "value": "16px", "type": "dimension" }, "md": { "value": "24px", "type": "dimension" }, "lg": { "value": "40px", "type": "dimension" }, "xl": { "value": "64px", "type": "dimension" } },
-  "borderRadius": { "none": { "value": "0px", "type": "dimension" }, "sm": { "value": "4px", "type": "dimension" }, "full": { "value": "9999px", "type": "dimension" } }
+  "borderRadius": { "none": { "value": "0px", "type": "dimension" }, "sm": { "value": "4px", "type": "dimension" }, "full": { "value": "9999px", "type": "dimension" } },
+  "somatic": {
+    "colors": {
+      "field": { "value": "#121126", "type": "color" },
+      "surface": { "value": "#201C32", "type": "color" },
+      "ink": { "value": "#F3EBDC", "type": "color" },
+      "muted": { "value": "#C3B8C8", "type": "color" },
+      "gold": { "value": "#C9A227", "type": "color" },
+      "focus": { "value": "#EFCE82", "type": "color" },
+      "line": { "value": "#C9A227", "type": "color" }
+    },
+    "rooms": {
+      "music": {
+        "field": { "value": "#121126", "type": "color" },
+        "surface": { "value": "#16283A", "type": "color" },
+        "accent": { "value": "#A5DDE6", "type": "color" },
+        "secondary": { "value": "#B5C9E3", "type": "color" }
+      },
+      "foundation": {
+        "field": { "value": "#121126", "type": "color" },
+        "surface": { "value": "#2E2524", "type": "color" },
+        "accent": { "value": "#E8B77A", "type": "color" },
+        "secondary": { "value": "#E7A18B", "type": "color" }
+      },
+      "community": {
+        "field": { "value": "#121126", "type": "color" },
+        "surface": { "value": "#332126", "type": "color" },
+        "accent": { "value": "#F0AC87", "type": "color" },
+        "secondary": { "value": "#E7B6B0", "type": "color" }
+      },
+      "manuals": {
+        "field": { "value": "#121126", "type": "color" },
+        "surface": { "value": "#23203B", "type": "color" },
+        "accent": { "value": "#D7D0F2", "type": "color" },
+        "secondary": { "value": "#BFB4E1", "type": "color" }
+      },
+      "design": {
+        "field": { "value": "#121126", "type": "color" },
+        "surface": { "value": "#212431", "type": "color" },
+        "accent": { "value": "#DDE0E8", "type": "color" },
+        "secondary": { "value": "#B7BFCD", "type": "color" }
+      },
+      "guardian": {
+        "field": { "value": "#121126", "type": "color" },
+        "surface": { "value": "#23193B", "type": "color" },
+        "accent": { "value": "#C0A9F5", "type": "color" },
+        "secondary": { "value": "#E3C574", "type": "color" }
+      }
+    },
+    "typography": {
+      "displayFont": { "value": "\"Playfair Display\", Georgia, serif", "type": "fontFamily", "description": "Provisional specimen face already loaded by the site; final selection awaits owner approval." },
+      "bodyFont": { "value": "\"DM Sans\", Arial, sans-serif", "type": "fontFamily" },
+      "displaySize": { "value": "clamp(64px, 12vw, 160px)", "type": "dimension" },
+      "bodySize": { "value": "clamp(16px, 1.3vw, 18px)", "type": "dimension" },
+      "captionSize": { "value": "12px", "type": "dimension" },
+      "displayLineHeight": { "value": 0.92, "type": "number" },
+      "bodyLineHeight": { "value": 1.75, "type": "number" }
+    },
+    "texture": {
+      "grainOpacity": { "value": 0.03, "type": "number" },
+      "paperOpacity": { "value": 0.025, "type": "number" },
+      "linelineWidth": { "value": "1px", "type": "dimension" },
+      "rimOpacity": { "value": 0.24, "type": "number" }
+    }
+  }
 }

@@ -9,6 +9,7 @@ import { parseEnv } from 'node:util';
 import { syncDevSource } from './dev-source.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const sourceDirectories = ['src', 'public', 'tokens'];
 const profiles = {
   gate: { port: 3000, gate: 'true', portfolio: 'false', dist: '.next' },
   site: { port: 3001, gate: 'false', portfolio: 'false', dist: '.next' },
@@ -80,7 +81,7 @@ try {
   const directory = join(root, '.dev', mode);
   await mkdir(directory, { recursive: true });
   for (const name of ['postcss.config.mjs', 'eslint.config.mjs']) await link(name, directory);
-  for (const name of ['src', 'public']) await syncDevSource(join(root, name), join(directory, name));
+  for (const name of sourceDirectories) await syncDevSource(join(root, name), join(directory, name));
   await writeIfChanged(join(directory, 'package.json'), `${JSON.stringify({ name: `jgawlik-dev-${mode}`, private: true }, null, 2)}\n`);
   await writeIfChanged(join(directory, 'next.config.ts'), "import config from '../../next.config';\nexport default config;\n");
   await writeIfChanged(join(directory, 'tsconfig.json'), `${JSON.stringify({
@@ -119,7 +120,7 @@ try {
     try {
       do {
         pending = false;
-        for (const name of ['src', 'public']) await syncDevSource(join(root, name), join(directory, name));
+        for (const name of sourceDirectories) await syncDevSource(join(root, name), join(directory, name));
       } while (pending && !stopped);
     } catch {
       process.stderr.write('Unable to synchronize development source. Restart this server.\n');
@@ -128,7 +129,7 @@ try {
       child.kill('SIGTERM');
     } finally { syncing = false; }
   };
-  for (const name of ['src', 'public']) {
+  for (const name of sourceDirectories) {
     let watcher;
     try {
       watcher = watch(join(root, name), { recursive: true }, () => {

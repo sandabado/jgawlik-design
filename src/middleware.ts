@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isPortfolioAccessAsset, isPublicGateAsset } from '@/lib/gating/assets';
 import { hasPreviewKey, isPublicGateEnabled, PREVIEW_COOKIE, PRIVATE_HEADERS } from '@/lib/gating/config';
 import { hasPortfolioSession, isPortfolioMode, PORTFOLIO_COOKIE } from '@/lib/portfolio-access/session';
+import { isSomaticSpecimenEnabled, SOMATIC_SPECIMEN_PATH } from '@/lib/design-system/somatic-access';
 
 function protect(response: NextResponse): NextResponse {
   for (const [name, value] of Object.entries(PRIVATE_HEADERS)) response.headers.set(name, value);
@@ -10,6 +11,19 @@ function protect(response: NextResponse): NextResponse {
 }
 
 export function middleware(request: NextRequest) {
+  try {
+    const pathname = decodeURIComponent(request.nextUrl.pathname);
+    // Check before either cookie bypass. No deployed environment exposes the study.
+    const specimenChunk = pathname.startsWith(`/_next/static/chunks/app${SOMATIC_SPECIMEN_PATH}/`)
+      || pathname.startsWith(`/_next/static/css/app${SOMATIC_SPECIMEN_PATH}/`);
+    if (pathname === SOMATIC_SPECIMEN_PATH || pathname.startsWith(`${SOMATIC_SPECIMEN_PATH}/`) || specimenChunk) {
+      return protect(isSomaticSpecimenEnabled()
+        ? NextResponse.next()
+        : new NextResponse('Not found.', { status: 404 }));
+    }
+  } catch {
+    return protect(new NextResponse('Not found.', { status: 404 }));
+  }
   if (isPortfolioMode()) return portfolioMiddleware(request);
   if (!isPublicGateEnabled()) return NextResponse.next();
 
