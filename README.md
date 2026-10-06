@@ -60,6 +60,8 @@ On `feature/unity-center`, port 3001 serves the new homepage and status-only `/d
 
 `UNITY_CENTER` defaults to enabled. For the retained original homepage, start the review server with `UNITY_CENTER=false npm run dev:site` (stop the existing 3001 server first). The original assembly is preserved in `src/components/OriginalHome.tsx`. This review flag does not disable either access gate. Environment changes require a restart; no private environment file needs editing for this command.
 
+For production, set `UNITY_CENTER` before a fresh build and deployment. The ungated homepage is prerendered during the build, so changing this flag only when starting an already-built server does not replace that homepage. Rebuild with the intended flag value to switch between the Unity Center and retained original home.
+
 Pillar pages contain only their approved status and a link home. Further content and live Press/Studio ingestion belong to Phase 5; their source URLs are recorded in the pillar data. `SeoConfig` prepares pillar metadata and accepts approved music audio/profile URLs later; it emits no fabricated playback or Spotify/Apple Music tags. Gate and private metadata remain inherited. [Unity Center verification](docs/unity-center-verification.md) records acceptance and boundaries.
 
 - `PUBLIC_GATE=true` enables the deployed gate. Missing or malformed values also enable it.
