@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { compassPillars, getPillar } from '@/lib/data/pillars';
+import { compassDestinations, compassPillars, getPillar, type PillarSlug } from '@/lib/data/pillars';
 import styles from './UnityCenter.module.css';
 
 export default function Quincunx({ compact = false }: { compact?: boolean }) {
@@ -14,13 +14,13 @@ export default function Quincunx({ compact = false }: { compact?: boolean }) {
               <span className={styles.pointGlyph} aria-hidden="true">{entry.glyph}</span>
               <span className={styles.pointBody}>{entry.body} <span>· {entry.pillar}</span></span>
               <strong>{entry.prompt}</strong>
-              <span className={styles.pointDoor}>{entry.name} <span aria-hidden="true">↗</span></span>
+              <span className={styles.pointDoor}>{compassDestinations[entry.slug as PillarSlug]} <span aria-hidden="true">↗</span></span>
             </Link>
           </li>
         ))}
       </ul>
       <Link className={styles.buildDoor} href={design.cta.href} prefetch={false}>
-        <span aria-hidden="true">🜂 → ⊙</span><strong>{design.prompt}</strong><span>{design.name} ↗</span>
+        <span aria-hidden="true">⚒️</span><strong>{design.prompt}</strong><span>{compassDestinations.design} ↗</span>
       </Link>
     </div>
   );

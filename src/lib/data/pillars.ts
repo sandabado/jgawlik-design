@@ -14,50 +14,50 @@ export interface PillarEntry extends ContentItem {
 /** Owner-approved copy, 5 October 2026. Status changes belong here, not in JSX. */
 export const pillars = [
   {
-    slug: 'design', name: 'Design', title: 'The built system', pillar: 'air',
-    body: 'Mental', glyph: '⊙', prompt: 'I want to build', status: 'active',
+    slug: 'design', name: 'Design', title: 'The Trust Harness', pillar: 'air',
+    body: 'Mental', glyph: '⊙', prompt: 'I need to build.', status: 'active',
     statusLabel: 'Active — Case studies in review', visualMode: 'professional',
-    summary: 'Where the trust work lives. Principal product design and agentic systems — the Trust Harness currently stress-tested inside a Fortune 100 environment. Visible logic. Human override. Verifiable outcomes.',
+    summary: 'Where the institutional work lives. Fourteen years inside Fortune 100 rooms. Building systems that don’t extract — they hold. The Trust Harness is live R&D: compressed cycles, human override, verifiable outcomes.',
     cta: { label: 'Enter the work', href: '/design' },
     seoKeywords: ['Product Designer', 'Systems Architect', 'Trust Harness', 'TETRA', 'LinkedIn', 'Enterprise UX'],
   },
   {
-    slug: 'music', name: 'Music', title: 'What the water carries', pillar: 'water',
-    body: 'Emotional', glyph: '🜄', prompt: 'I feel something stirring', status: 'active',
+    slug: 'music', name: 'Music', title: 'The Vibration', pillar: 'water',
+    body: 'Emotional', glyph: '🜄', prompt: 'I need to hear the song.', status: 'active',
     statusLabel: 'Records live · Debut in preparation', visualMode: 'ethereal',
-    summary: 'Sound as record. The songs remember. Whole Body Studios and Whole Body Records — an artist-owned house where the makers eat first. The Sandābādo catalog is live; the debut release is in preparation.',
+    summary: 'Sound as memory. Songs that remember us. Whole Body Records. Sandābādo. The catalog is live. The debut is tuning. Every track is a frequency map of what we carry.',
     cta: { label: 'Enter the studio', href: '/music' }, sourceUrl: 'https://www.wholebody.studio/',
     seoKeywords: ['Sandābādo', 'Whole Body Records', 'Whole Body Studios', 'Music'],
   },
   {
-    slug: 'manuals', name: 'Manuals', title: 'The written bones', pillar: 'air',
-    body: 'Mental', glyph: '🜁', prompt: 'I want to understand', status: 'preview',
+    slug: 'manuals', name: 'Manuals', title: 'The Written Bone', pillar: 'air',
+    body: 'Mental', glyph: '🜁', prompt: 'I need to understand the pattern.', status: 'preview',
     statusLabel: 'Manual I previewing', visualMode: 'ethereal',
-    summary: 'Words that outlive the speaker. The Living Body Series — five volumes from the foundation of presence to the engineering of trust. Manual I is open in public preview; four more rest in editorial hold.',
+    summary: 'Words that outlast the voice. The Living Body Series. Five volumes from presence to trust. Manual I is open. Four more wait in the wings.',
     cta: { label: 'Enter the library', href: '/manuals' }, sourceUrl: 'https://www.wholebody.press/',
     seoKeywords: ['Living Body Series', 'Whole Body Presence', 'Whole Body Press', 'Manual I'],
   },
   {
-    slug: 'community', name: 'Community', title: 'The held space', pillar: 'fire',
-    body: 'Spiritual', glyph: '🜂', prompt: 'I want to be in the room', status: 'preview',
+    slug: 'community', name: 'Community', title: 'The Held Space', pillar: 'fire',
+    body: 'Spiritual', glyph: '🜂', prompt: 'I need to feel the heat.', status: 'preview',
     statusLabel: 'Invite-only beta · Open access 2027', visualMode: 'ethereal',
-    summary: "A ceremony, not a funnel. Whole Body Presence — men's circles, women's circles, the weekly fire. Five energies, twelve houses, real rooms. No fixing. No advice. Enough space for what's true.",
+    summary: 'Not a funnel. A fire. Men’s circles. Women’s circles. Weekly flame. No fixing. No advice. Just enough room for what’s true to rise.',
     cta: { label: 'Enter the fire', href: '/community' },
     seoKeywords: ['Whole Body Presence', 'Circles', 'Community'],
   },
   {
-    slug: 'foundation', name: 'Foundation', title: 'The ground itself', pillar: 'earth',
-    body: 'Physical', glyph: '🜃', prompt: 'I need something real', status: 'development',
+    slug: 'foundation', name: 'Foundation', title: 'The Open Expanse', pillar: 'earth',
+    body: 'Physical', glyph: '🜃', prompt: 'I need solid ground.', status: 'development',
     statusLabel: 'Research phase', visualMode: 'ethereal',
-    summary: 'The desert is not empty. It is information-dense. Eastern Mojave fieldwork — baseline geophysics, regenerative growing, water discipline, and the honest reading of carrying capacity. Nothing public is a promise of physical performance.',
+    summary: 'The desert is not empty. It’s full of information. Eastern Mojave. Regenerative growth. Water discipline. Carrying capacity. Nothing here is a promise — it’s all a lesson.',
     cta: { label: 'Enter the field', href: '/foundation' },
     seoKeywords: ['Whole Body Foundation', 'Fieldwork', 'Land stewardship', 'Research'],
   },
   {
-    slug: 'guardian', name: 'Guardian', title: 'The boundary that holds', pillar: 'ether',
-    body: 'Ethereal', glyph: '☉', prompt: 'I want to protect it', status: 'development',
+    slug: 'guardian', name: 'Guardian', title: 'The Boundary', pillar: 'ether',
+    body: 'Ethereal', glyph: '☉', prompt: 'I need to protect what matters.', status: 'development',
     statusLabel: 'In development', visualMode: 'ethereal',
-    summary: 'Agreements, stewardship, protection. The Ether pillar: the invisible architecture that lets every other body remain sovereign. The door is marked.',
+    summary: 'Agreements that let everything else breathe. Sovereign tools. Invisible architecture. The door is marked.',
     cta: { label: 'Request the agreements', href: '/guardian' },
     seoKeywords: ['Whole Body Guardian', 'Sovereign tools', 'Agreements', 'Stewardship'],
   },
@@ -65,6 +65,15 @@ export const pillars = [
 
 export type PillarSlug = typeof pillars[number]['slug'];
 export const getPillar = (slug: PillarSlug) => pillars.find((item) => item.slug === slug)!;
+
+export const compassDestinations: Record<PillarSlug, string> = {
+  design: 'Design — Trust harnesses for real people',
+  music: 'Music — Vibration as record',
+  manuals: 'Manuals — Words that outlive the speaker',
+  community: 'Community — Circles where hearts open',
+  foundation: 'Foundation — The desert as teacher',
+  guardian: 'Guardian — Agreements that hold',
+};
 
 // Five energy points around one center; Design is an additional professional door.
 export const compassPillars: readonly PillarEntry[] = ['community', 'manuals', 'guardian', 'music', 'foundation']

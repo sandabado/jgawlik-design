@@ -53,3 +53,26 @@ Live Press/Studio ingestion is deferred with the pillar content, as required by 
 | Cache and source parity | **Pass:** all 94 runtime/config files match each of the three isolated build sources. All three generated dev source mirrors match the canonical source and retain distinct cache paths. |
 
 Local evidence lives in `/private/tmp/jgawlik-unity-center/`: build/lint/typecheck logs, `http-results.json`, `security-results.json`, `preservation.json`, `source-equivalence.json`, `browser-unity.json`, and the retained disclosure failure. Screenshots are saved outside Git in the task visualization directory. Temporary QA servers/tabs were removed; the three authorized review servers remain running. Existing password secrets were not read or reset. Hosted/CI/native-print verification is outside this local pass.
+
+## “The One Hand” copy refresh — 5 October 2026
+
+The owner's subsequent copy package replaces the hero, compass prompts and destination captions, six card titles/descriptions, bio and footer. `OnePractice.tsx` adds “One Practice, Many Materials” between the hero/compass and the pillar cards. It is server-rendered and reuses the existing bio typography and layout classes. Section numbering now runs 01–04. The hero's “Enter the field” anchor still enters the compass.
+
+The owner explicitly chose “At American Express, I stress-test systems so **people** can trust them,” preserving the reconciliation's removal of the unverified audience-size assertion. The remainder uses the supplied positioning. Existing status labels are retained verbatim, including “Active — Case studies in review,” “Records live · Debut in preparation” and “Invite-only beta · Open access 2027.” Enum statuses and their badge markup are unchanged. Card headings retain the existing title-case treatment.
+
+All stylesheets, navigation behavior, authentication, public gating, route destinations, ContentItem schema and SEO utility/Person JSON-LD remain byte-identical to `fec0806`. Updated pillar summaries feed the existing per-pillar metadata utility automatically; no SEO implementation changes were made. Retained résumé, project, timeline and publication data are unchanged. No Phase 5 pillar content or integrations were added.
+
+| Check | Copy-refresh result |
+| --- | --- |
+| Lint / TypeScript / tokens / whitespace | **Pass:** ESLint, `tsc --noEmit --typeRoots ./node_modules/@types`, design-token validation and `git diff --check`. |
+| Production builds | **Pass:** review, public gate and password portfolio modes on Node 22.23.3 in isolated source copies. All 104 captured source/config files matched canonical before and after builds; no private env files were copied. The previously documented direct-checkout ambient type-package limitation is unchanged. |
+| Three-server regression | **68 anonymous HTTP checks passed:** original/pillar routes, gate/password redirects, public/private assets and API method policies. |
+| Updated-copy boundary | **31 checks passed:** new copy appears on 3001; none appears in anonymous responses from the gated routes or publicly permitted assets on 3000/3002. No Unity Person JSON-LD appears on those gate responses. |
+| Desktop and mobile | **Pass:** rendered at 1280 px and 390 px viewport widths; the document and checked copy/links have no horizontal overflow. The five compass points and Design door wrap within the 327 px mobile field. The new section sits between compass and cards and displays the owner-approved wording. |
+| Navigation / appearance | **Pass:** hero anchor focuses the compass; mobile native constellation opens and closes with Escape, its seven links fit without overflow, and professional/ethereal appearance changes in place while the copy remains present. |
+| Gate / private portfolio / console | **Pass:** browser 3000 shows Coming Soon only; the existing owner-authenticated 3002 session retains its private homepage and portfolio navigation. Captured console error lists are empty for all three experiences. No new incognito test or password entry is claimed. |
+| Preservation / dev parity | **Pass:** 28 selected retained content/style/access/navigation/SEO files match `fec0806` byte-for-byte. All 90 source/public files match each of the three dev mirrors. Existing loopback listeners and separate caches remain in use; no restart or secret change was needed. |
+
+Evidence is retained in `/private/tmp/jgawlik-one-hand/`: lint/typecheck and three build logs, source-equivalence and preservation manifests, HTTP/copy-boundary results and browser results. An initial scratch assertion compared the gate's raw HTML with its rendered heading and failed on the existing nested span; inspection confirmed no copy leakage. The assertion was corrected to normalize heading markup, and the initial result is retained. Browser locator ambiguities were resolved using the observed href/label; they produced no application console errors.
+
+Screenshots `one-hand-hero-desktop.png`, `one-hand-practice-desktop.png` and `one-hand-compass-mobile.png` are saved outside Git in the task visualization directory. The temporary test tab was closed and its viewport override reset. All three review tabs/servers remain available. This refresh is local on `feature/unity-center`; no push, merge, deployment, hosted verification or native print/PDF export was performed.

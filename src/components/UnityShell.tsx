@@ -29,9 +29,9 @@ export default function UnityShell({ children }: { children: ReactNode }) {
       </header>
       <div className={styles.content} id="unity-content" tabIndex={-1}>{children}</div>
       <footer className={styles.footer}>
-        <p>The field is quiet. The fire is gathering.<br />Return when the signal is clear.</p>
-        <div><a href="mailto:jesse.gawlik@gmail.com">Contact ↗</a><Link href="/resume" prefetch={false}>Résumé ↗</Link></div>
-        <span>© 2026 Jesse Gawlik. Designed and built from scratch.</span>
+        <p>The field is quiet. The fire is waiting.<br />Come when you’re ready.</p>
+        <div><a href="mailto:jesse.gawlik@gmail.com">Contact ↗</a><Link href="/resume" prefetch={false}>Resume ↗</Link></div>
+        <span>© 2026 Jesse Gawlik. Built from the center out.</span>
       </footer>
     </main>
   );

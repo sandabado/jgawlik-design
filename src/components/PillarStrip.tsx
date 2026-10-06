@@ -5,7 +5,7 @@ import styles from './UnityCenter.module.css';
 export default function PillarStrip() {
   return (
     <section className={styles.pillars} aria-labelledby="pillars-title">
-      <header className={styles.sectionHeader}><p className={styles.kicker}>02 / SIX DOORS</p><h2 id="pillars-title">One living system.</h2></header>
+      <header className={styles.sectionHeader}><p className={styles.kicker}>03 / SIX DOORS</p><h2 id="pillars-title">One living system.</h2></header>
       <div className={styles.pillarGrid}>
         {pillars.map((entry, index) => (
           <article className={styles.pillarCard} key={entry.slug} aria-labelledby={`pillar-${entry.slug}`}>
