@@ -2,6 +2,13 @@
 
 Review date: 5 October 2026. Branch: `feature/somatic`.
 
+**Owner ruling, 5 October 2026:** Stage 1 is not approved as the foundation
+gate. [Stage 1.5 — the Living Specimen](./somatic-stage-1.5.md) now supplies
+the experiential review gate. Stage 2 remains blocked until the owner
+approves that living study by feel. Cormorant + Source Sans 3 is provisionally
+approved; the existing type remains in this behavior-only pass. The record
+below preserves the original Stage 1 submission and verification.
+
 Stage 1 establishes the token layer and a private development specimen for
 **Desert Mysticism × Industrial Craft**: a monk's manuscript built with an
 engineer's hands. The governing sources are [design.md](./design.md) and

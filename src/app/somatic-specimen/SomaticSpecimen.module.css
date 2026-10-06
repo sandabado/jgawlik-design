@@ -1,4 +1,5 @@
 .specimen {
+  --somatic-living-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.83' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23ffffff' filter='url(%23grain)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
   overflow: clip;
   min-height: 100vh;
   background: var(--somatic-field);
@@ -12,9 +13,26 @@
 .specimen::before { display: none; }
 .specimen :where(h1, h2, h3, p) { margin: 0; }
 .specimen :where(h1, h2, h3) { font-family: var(--somatic-display-font); font-weight: 400; }
-.specimen :where(a):focus-visible { outline: 2px solid var(--somatic-focus); outline-offset: 7px; }
+.specimen :where(a, button, input, [tabindex]):focus-visible { outline: 2px solid var(--somatic-focus); outline-offset: 7px; }
+.specimen :where(a, button, input, [tabindex]) { scroll-margin-bottom: 160px; }
 .specimen :where(a) { color: inherit; }
 .specimen :where(em) { font-weight: 400; }
+.field { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: var(--somatic-field); }
+.temperatureLayer { position: absolute; inset: 0; opacity: 0; background: radial-gradient(ellipse at 76% 32%, color-mix(in srgb, var(--somatic-room-accent) 7%, transparent), transparent 62%), radial-gradient(ellipse at 12% 78%, color-mix(in srgb, var(--somatic-room-secondary) 4%, transparent), transparent 55%); transition: opacity 2s ease; }
+.specimen[data-active-room='music'] .temperatureLayer[data-field-room='music'],
+.specimen[data-active-room='foundation'] .temperatureLayer[data-field-room='foundation'],
+.specimen[data-active-room='community'] .temperatureLayer[data-field-room='community'],
+.specimen[data-active-room='manuals'] .temperatureLayer[data-field-room='manuals'],
+.specimen[data-active-room='design'] .temperatureLayer[data-field-room='design'],
+.specimen[data-active-room='guardian'] .temperatureLayer[data-field-room='guardian'] { opacity: 1; }
+.livingGrain { position: fixed; inset: -80px; z-index: 0; pointer-events: none; opacity: var(--somatic-grain-opacity); background-image: var(--somatic-living-noise); transform: translate3d(0, var(--somatic-grain-shift, 0px), 0); will-change: transform; }
+.motionControls { position: fixed; right: clamp(16px, 3vw, 32px); bottom: 20px; z-index: 30; display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 12px; max-width: calc(100vw - 32px); }
+.motionToggle, .walkControls { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--somatic-surface); color: var(--somatic-ink); border: 1px solid var(--somatic-gold); }
+.motionToggle { min-height: 44px; cursor: pointer; font-size: var(--somatic-caption-size); letter-spacing: .06em; }
+.motionToggle input { width: 18px; height: 18px; margin: 0; accent-color: var(--somatic-gold); }
+.motionToggle:focus-within { outline: 2px solid var(--somatic-focus); outline-offset: 5px; }
+.walkStatus { font-size: var(--somatic-caption-size); color: var(--somatic-muted); }
+.stopWalk { min-width: 44px; min-height: 44px; padding: 8px 10px; border: 1px solid var(--somatic-gold); background: var(--somatic-field); color: var(--somatic-ink); font-size: var(--somatic-caption-size); }
 .skip { position: absolute; top: -100px; left: 24px; padding: 12px 20px; background: var(--somatic-field); z-index: 20; }
 .skip:focus { top: 20px; }
 .caption, .eyebrow { font-size: var(--somatic-caption-size); letter-spacing: .12em; color: var(--somatic-muted); }
@@ -31,28 +49,60 @@
 .textLink { display: inline-block; font-size: 13px; letter-spacing: .04em; text-decoration: underline; text-decoration-color: var(--somatic-gold); text-underline-offset: 8px; padding: 6px 0; }
 .textLink span { margin-left: 12px; color: var(--somatic-gold); }
 .glassStudy { position: absolute; width: 48%; height: 660px; top: 18px; right: -24px; }
-.studyRule { position: absolute; top: 80px; right: 44%; height: 535px; width: 1px; background: var(--somatic-gold); transform: rotate(34deg); opacity: .7; }
-.glassPane { position: absolute; display: flex; flex-direction: column; justify-content: center; padding: 22px; width: 44%; height: 205px; text-decoration: none; background: var(--somatic-room-surface); border: 1px solid var(--somatic-gold); color: var(--somatic-room-accent) !important; clip-path: polygon(0 16%, 80% 0, 100% 16%, 100% 84%, 20% 100%, 0 84%); box-shadow: inset 0 0 80px color-mix(in srgb, var(--somatic-room-accent) 6%, transparent); transition: background-color 1.8s ease, box-shadow 1.8s ease; }
-.glassPane::before { content: ''; position: absolute; inset: 24px 15px; border-top: 1px solid color-mix(in srgb, var(--somatic-gold) 32%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--somatic-gold) 32%, transparent); transform: skewY(-12deg); pointer-events: none; }
-.glassPane:hover, .glassPane:focus-visible { background: color-mix(in srgb, var(--somatic-room-surface) 92%, var(--somatic-room-accent)); box-shadow: inset 0 0 80px color-mix(in srgb, var(--somatic-room-accent) 12%, transparent); }
+.filaments { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.thread, .current { fill: none; stroke: var(--somatic-gold); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.thread { opacity: .26; }
+.current { opacity: .7; stroke-dasharray: 3 22; stroke-dashoffset: 0; }
+.specimen[data-living-ready='true'] .current { animation: somaticCurrent 8s linear infinite; }
+.paneFrame { position: absolute; width: 44%; height: 205px; z-index: 2; isolation: isolate; transition: transform 850ms cubic-bezier(.22, .7, .35, 1); }
+.paneBloom { position: absolute; inset: -25px; z-index: -1; pointer-events: none; opacity: .3; border-radius: 42%; background: radial-gradient(ellipse at 50% 55%, color-mix(in srgb, var(--somatic-room-accent) 24%, transparent), transparent 70%); box-shadow: 0 12px 32px color-mix(in srgb, var(--somatic-room-accent) 10%, transparent), 0 3px 18px color-mix(in srgb, var(--somatic-field) 75%, transparent); transition: opacity 600ms ease, box-shadow 600ms ease; }
+.glassPane { position: relative; z-index: 1; isolation: isolate; display: flex; flex-direction: column; justify-content: center; padding: 22px; width: 100%; height: 100%; text-decoration: none; background: var(--somatic-room-surface); border: 1px solid var(--somatic-gold); color: var(--somatic-room-accent) !important; clip-path: polygon(0 16%, 80% 0, 100% 16%, 100% 84%, 20% 100%, 0 84%); box-shadow: inset 0 0 80px color-mix(in srgb, var(--somatic-room-accent) 6%, transparent); transition: background-color 600ms ease, box-shadow 600ms ease; }
+.glassPane > * { position: relative; z-index: 1; }
+.glassPane::before { content: ''; position: absolute; inset: 24px 15px; z-index: 0; border-top: 1px solid color-mix(in srgb, var(--somatic-gold) 32%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--somatic-gold) 32%, transparent); transform: skewY(-12deg); opacity: 1; pointer-events: none; transition: opacity 600ms ease; }
+.glassPane::after { content: ''; position: absolute; inset: -80px; z-index: 0; pointer-events: none; opacity: var(--somatic-grain-opacity); background-image: var(--somatic-living-noise); transform: translate3d(0, var(--somatic-grain-shift, 0px), 0); }
+.paneFrame:is(:hover, :focus-within) { transform: scale(1.02); z-index: 4; }
+.paneFrame:is(:hover, :focus-within) .paneBloom { opacity: .75; box-shadow: 0 12px 42px color-mix(in srgb, var(--somatic-room-accent) 18%, transparent), 0 3px 18px color-mix(in srgb, var(--somatic-field) 75%, transparent); }
+.paneFrame:is(:hover, :focus-within) .glassPane { background: color-mix(in srgb, var(--somatic-room-surface) 92%, var(--somatic-room-accent)); box-shadow: inset 0 0 80px color-mix(in srgb, var(--somatic-room-accent) 12%, transparent); }
+.glassStudy:has(.paneFrame:is(:hover, :focus-within)) .paneFrame:not(:is(:hover, :focus-within)) .paneBloom { opacity: .15; }
+.glassStudy:has(.paneFrame:is(:hover, :focus-within)) .paneFrame:not(:is(:hover, :focus-within)) .glassPane::before { opacity: .62; }
 .glassPane:focus-visible { clip-path: none; outline-offset: 5px; }
-.glassPane[data-room='music'] { left: 7%; top: 78px; }
-.glassPane[data-room='foundation'] { right: 0; top: 10px; }
-.glassPane[data-room='community'] { left: 2%; top: 285px; }
-.glassPane[data-room='manuals'] { right: -3%; top: 218px; }
-.glassPane[data-room='design'] { left: 11%; top: 493px; }
-.glassPane[data-room='guardian'] { right: -1%; top: 424px; }
+.paneFrame[data-room='music'] { left: 7%; top: 78px; }
+.paneFrame[data-room='foundation'] { right: 0; top: 10px; }
+.paneFrame[data-room='community'] { left: 2%; top: 285px; }
+.paneFrame[data-room='manuals'] { right: -3%; top: 218px; }
+.paneFrame[data-room='design'] { left: 11%; top: 493px; }
+.paneFrame[data-room='guardian'] { right: -1%; top: 424px; }
 .paneNumeral { font-family: var(--somatic-display-font); font-size: 24px; color: var(--somatic-gold); }
 .paneName { font-family: var(--somatic-display-font); font-size: clamp(24px, 3vw, 42px); line-height: 1.25; margin-top: 8px; }
 .paneCaption { font-size: 12px; color: var(--somatic-ink); }
 .studyCaption { position: absolute; bottom: -65px; right: 18px; font-size: 12px; letter-spacing: .09em; color: var(--somatic-muted); }
+.breathControl { display: inline-flex; align-items: center; gap: 12px; min-width: 44px; min-height: 44px; margin: 14px 0 0 22px; vertical-align: middle; pointer-events: auto; text-decoration: none; }
+.clover { width: 80px; height: 100px; overflow: visible; color: var(--somatic-gold); }
+.cloverBreath { transform-box: fill-box; transform-origin: 50% 50%; }
+.specimen[data-living-ready='true'] .cloverBreath { animation: somaticBreath 5s ease-in-out infinite; }
+.cloverLeaf { fill: color-mix(in srgb, var(--somatic-gold) 5%, transparent); stroke: var(--somatic-gold); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.cloverStem { fill: none; stroke: var(--somatic-gold); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.cloverPoint { fill: var(--somatic-focus); }
+.breathCaption { max-width: 95px; font-size: var(--somatic-caption-size); color: var(--somatic-muted); letter-spacing: .06em; }
+.breathControl:is(:hover, :focus-visible) .cloverLeaf { fill: color-mix(in srgb, var(--somatic-gold) 10%, transparent); }
+.specimen[data-walking='true'] .cloverPoint { fill: var(--somatic-ink); }
 .heroMargin { position: absolute; bottom: 0; width: 100%; display: flex; justify-content: space-between; gap: 20px; padding: 20px 0; color: var(--somatic-muted); border-bottom: 1px solid color-mix(in srgb, var(--somatic-gold) 42%, transparent); font-size: 12px; letter-spacing: .09em; }
 .rooms { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 30px; padding: 140px 0 40px; }
 .sectionIntro { grid-column: 1 / 11; padding-bottom: 95px; }
 .sectionIntro h2, .reading h2, .typeStudy h2 { font-size: clamp(56px, 8vw, 110px); line-height: 1; letter-spacing: -.05em; margin: 25px 0; }
 .sectionIntro h2 em, .reading h2 em, .typeStudy h2 em { color: var(--somatic-gold); }
 .sectionIntro > p:last-child { color: var(--somatic-muted); margin-left: 26%; }
-.room { grid-column: 1 / 8; margin-bottom: 90px; padding: clamp(26px, 4vw, 58px); background: var(--somatic-room-surface); scroll-margin-top: 32px; }
+.room { position: relative; isolation: isolate; grid-column: 1 / 8; margin-bottom: 90px; padding: clamp(26px, 4vw, 58px); background: var(--somatic-room-surface); scroll-margin-top: 32px; transition: background-color 600ms ease, box-shadow 600ms ease, transform 850ms cubic-bezier(.22, .7, .35, 1); }
+.room > :not(.roomBloom):not(.roomFilament) { position: relative; z-index: 1; }
+.room > .roomBloom { position: absolute; inset: -30px; z-index: -1; padding: 30px; border-radius: 18%; opacity: .2; pointer-events: none; background: radial-gradient(ellipse at 50% 65%, color-mix(in srgb, var(--somatic-room-accent) 20%, transparent), transparent 72%); box-shadow: 0 16px 40px color-mix(in srgb, var(--somatic-room-accent) 6%, transparent); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; transition: opacity 600ms ease, box-shadow 600ms ease; }
+.room:not([data-study-room='manuals'])::after { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: var(--somatic-grain-opacity); background-image: var(--somatic-living-noise); background-position: 0 var(--somatic-grain-shift, 0px); }
+.room > .roomFilament { position: absolute; top: calc(100% + 12px); left: 12%; width: 76%; height: 66px; overflow: visible; z-index: 0; pointer-events: none; }
+.roomFilament .thread { opacity: .18; }
+.roomFilament .current { opacity: .46; }
+.specimen .room:is(:hover, :focus-visible, :focus-within) { background: color-mix(in srgb, var(--somatic-room-surface) 98%, var(--somatic-room-accent)); box-shadow: inset 0 0 100px color-mix(in srgb, var(--somatic-room-accent) 4%, transparent); transform: scale(1.02); }
+.room:is(:hover, :focus-visible, :focus-within) .roomBloom { opacity: .6; box-shadow: 0 16px 48px color-mix(in srgb, var(--somatic-room-accent) 14%, transparent); }
+.rooms:has(.room:is(:hover, :focus-visible, :focus-within)) .room:not(:is(:hover, :focus-visible, :focus-within)) .roomBloom { opacity: .1; }
+.room:focus-visible { outline-offset: 8px; }
 .room:nth-of-type(even) { grid-column: 5 / 13; }
 .room:nth-of-type(3) { grid-column: 2 / 10; }
 .room:nth-of-type(5) { grid-column: 1 / 9; }
@@ -82,14 +132,33 @@
 .fontChoices h3 { font-size: 30px; line-height: 1.3; margin-bottom: 12px; }
 .fontChoices p { color: var(--somatic-muted); margin-bottom: 12px; }
 .fontChoices a { display: block; width: fit-content; }
-.footer { padding: 40px 0 70px; border-top: 1px solid var(--somatic-gold); display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+.footer { padding: 40px 0 160px; border-top: 1px solid var(--somatic-gold); display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
 .footer > p { font-family: var(--somatic-display-font); font-size: 28px; }
+
+@keyframes somaticCurrent { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -100; } }
+@keyframes somaticBreath { 0%, 100% { transform: scale(.985); } 50% { transform: scale(1.02); } }
+
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) *,
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) *::before,
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) *::after { animation: none !important; transition: none !important; }
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) .paneFrame,
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) .room,
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) .cloverBreath,
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) .livingGrain,
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) .glassPane::after { transform: none !important; }
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) .livingGrain { will-change: auto; }
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) .room::after { background-position: 0 0 !important; }
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) .paneBloom { opacity: .3 !important; }
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) .roomBloom { opacity: .2 !important; }
+.specimen:is([data-reduced-motion='true'], :has(:global(#somatic-stillness):checked)) .glassPane::before { opacity: 1 !important; }
+:global(html):has(.specimen[data-reduced-motion='true']),
+:global(html):has(.specimen :global(#somatic-stillness):checked) { scroll-behavior: auto; }
 
 @media (max-width: 1100px) {
   .hero { padding-top: 65px; min-height: 1290px; }
   .hero h1 { font-size: clamp(64px, 15vw, 120px); }
   .glassStudy { top: 540px; left: 4%; right: auto; width: 88%; }
-  .glassPane { width: 43%; }
+  .paneFrame { width: 43%; }
   .rooms { column-gap: 0; }
   .room, .room:nth-of-type(even), .room:nth-of-type(3), .room:nth-of-type(5) { grid-column: 1 / 13; }
   .room:nth-of-type(even) { margin-left: 5%; }
@@ -118,9 +187,22 @@
   .readingCopy, .typeNote { margin-left: 0; }
   .fontChoices li { gap: 15px; }
   .fontChoices h3 { font-size: 26px; }
+  .breathControl { margin-left: 12px; gap: 8px; }
+  .clover { width: 54px; height: 68px; }
+  .breathCaption { max-width: 85px; }
+  .motionControls { bottom: 12px; gap: 8px; }
+  .motionToggle, .walkControls { padding: 8px 10px; gap: 8px; }
+  .walkControls { flex-wrap: wrap; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .specimen { scroll-behavior: auto; }
-  .glassPane { transition: none; }
+  .specimen *, .specimen *::before, .specimen *::after { animation: none !important; transition: none !important; }
+  .paneFrame, .room, .cloverBreath, .livingGrain, .glassPane::after { transform: none !important; }
+  .livingGrain { will-change: auto; }
+  .room::after { background-position: 0 0 !important; }
+  .paneBloom { opacity: .3 !important; }
+  .roomBloom { opacity: .2 !important; }
+  .glassPane::before { opacity: 1 !important; }
+  :global(html):has(.specimen) { scroll-behavior: auto; }
 }
